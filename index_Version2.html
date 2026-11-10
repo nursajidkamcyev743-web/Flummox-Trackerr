@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>План Трекер | Купить</title>
+  <meta name="description" content="План трекер для продуктивности, целей и дисциплины. Купить цифровой продукт." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg2: #111827;
+      --card: #171f33;
+      --card-2: #1f2a44;
+      --primary: #7c9cff;
+      --primary-2: #a78bfa;
+      --text: #eef2ff;
+      --muted: #b7bfd7;
+      --success: #4ade80;
+      --warning: #fbbf24;
+      --danger: #fb7185;
+      --line: rgba(255,255,255,0.08);
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.26);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #0b1020 0%, #111827 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(11, 16, 32, 0.72);
+      border-bottom: 1px solid var(--line);
+      z-index: 10;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 70px;
+    }
+
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 24px;
+      border-radius: 14px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s ease;
+      letter-spacing: 0.01em;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .hero {
+      padding: 64px 0 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(124, 156, 255, 0.12);
+      border: 1px solid rgba(124, 156, 255, 0.3);
+      color: #dfe8ff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 4vw, 4.5rem);
+      line-height: 1.05;
+      margin: 0 0 18px;
+      letter-spacing: -0.04em;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .mini-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .mini-stats span strong {
+      color: var(--text);
+      font-size: 1.1rem;
+    }
+
+    .product-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .mockup {
+      background: linear-gradient(180deg, var(--card), var(--card-2));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+    }
+
+    .mockup-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .dots span:nth-child(1) { background: #f87171; }
+    .dots span:nth-child(2) { background: #fbbf24; }
+    .dots span:nth-child(3) { background: #4ade80; }
+
+    .planner {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .planner-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    .task-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .task {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .check {
+      width: 20px;
+      height: 20px;
+      border-radius: 8px;
+      background: rgba(74, 222, 128, 0.18);
+      border: 1px solid rgba(74, 222, 128, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--success);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .task small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    section {
+      padding: 26px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .section-title h2 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 3vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(124,156,255,0.18), rgba(167,139,250,0.18));
+      border: 1px solid rgba(124,156,255,0.18);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      font-size: 1.4rem;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .price-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .price-box {
+      padding: 10px 0;
+    }
+
+    .old-price {
+      color: var(--muted);
+      text-decoration: line-through;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .new-price {
+      font-size: clamp(2.3rem, 4vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin: 0 0 12px;
+    }
+
+    .new-price small {
+      font-size: 0.8rem;
+      font-weight: 700;
+      opacity: 0.9;
+    }
+
+    .list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+    }
+
+    .list li::before {
+      content: "✓";
+      color: var(--success);
+      margin-right: 10px;
+      font-weight: 700;
+    }
+
+    .buy-panel {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .buy-panel h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .pay-text {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .contact-block {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .small {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 20px;
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(124,156,255,0.18), rgba(167,139,250,0.18));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      padding: 24px 0 50px;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid var(--line);
+      margin-top: 32px;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .price-wrap,
+      .features,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">ПЛАН ТРЕКЕР</div>
+      <nav class="nav-links">
+        <a href="#features">Преимущества</a>
+        <a href="#how">Как работает</a>
+        <a href="#price">Цена</a>
+      </nav>
+      <a class="btn primary" href="https://wa.me/996700000000?text=%D0%97%D0%B5%D0%BB%D0%B0%D1%8E%20%D0%BA%D1%83%D0%BF%D0%B8%D1%82%D1%8C%20%D0%9F%D0%BB%D0%B0%D0%BD%20%D0%A2%D1%80%D0%B5%D0%BA%D0%B5%D1%80" target="_blank" rel="noreferrer">Купить</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Цифровой продукт для дисциплины и целей</div>
+          <h1>План Трекер, который помогает жить по системе.</h1>
+          <p class="lead">
+            Сборник шаблонов для планирования дня, целей, задач, привычек и финансов.
+            Все в одном месте — просто, удобно и понятно.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="https://wa.me/996700000000?text=%D0%97%D0%B5%D0%BB%D0%B0%D1%8E%20%D0%BA%D1%83%D0%BF%D0%B8%D1%82%D1%8C%20%D0%9F%D0%BB%D0%B0%D0%BD%20%D0%A2%D1%80%D0%B5%D0%BA%D0%B5%D1%80" target="_blank" rel="noreferrer">Купить сейчас</a>
+            <a class="btn secondary" href="#price">Узнать цену</a>
+          </div>
+
+          <div class="mini-stats">
+            <span><strong>3 000+</strong> записей</span>
+            <span><strong>1 файл</strong> после оплаты</span>
+            <span><strong>100%</strong> гайд</span>
+          </div>
+        </div>
+
+        <div class="product-box">
+          <div class="mockup">
+            <div class="mockup-top">
+              <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span>PLAN TRACKER</span>
+            </div>
+
+            <div class="planner">
+              <div class="planner-header">
+                <span>Сегодня</span>
+                <span>11 задач</span>
+              </div>
+
+              <div class="task-list">
+                <div class="task">
+                  <span class="check">✓</span>
+                  <div>
+                    <strong>5 целей</strong>
+                    <small>Сделать приоритеты</small>
+                  </div>
+                </div>
+
+                <div class="task">
+                  <span class="check">✓</span>
+                  <div>
+                    <strong>3 привычки</strong>
+                    <small>Держать ритм</small>
+                  </div>
+                </div>
+
+                <div class="task">
+                  <span class="check">✓</span>
+                  <div>
+                    <strong>Задачи на день</strong>
+                    <small>Чек-лист без хаоса</small>
+                  </div>
+                </div>
+
+                <div class="task">
+                  <span class="check">✓</span>
+                  <div>
+                    <strong>Финансовые цели</strong>
+                    <small>Считать и планировать</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>Что входит в продукт</h2>
+          <p>Всё, чтобы планировать день без стресса.</p>
+        </div>
+
+        <div class="features">
+          <div class="card">
+            <div class="icon">📅</div>
+            <h3>Ежедневный план</h3>
+            <p>Разделение на задачи, приоритеты и время. Легко видеть, что важно сегодня.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">🎯</div>
+            <h3>Цели и задачи</h3>
+            <p>Таблица для долгосрочных целей, промежуточных шагов и контроля прогресса.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">💸</div>
+            <h3>Финансовая система</h3>
+            <p>Отслеживание доходов, расходов и накоплений без лишнего хаоса.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">✅</div>
+            <h3>Привычки и ритм</h3>
+            <p>Проверка привычек, мотивации и дисциплины на протяжении недели.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="container">
+        <div class="section-title">
+          <h2>Как это работает</h2>
+          <p>Просто, быстро и без лишних действий.</p>
+        </div>
+
+        <div class="steps">
+          <div class="card">
+            <div class="step-number">1</div>
+            <h3>Вы покупаете</h3>
+            <p>Нажимаете кнопку “Купить” и отправляете запрос в WhatsApp или Telegram.</p>
+          </div>
+
+          <div class="card">
+            <div class="step-number">2</div>
+            <h3>Оплата</h3>
+            <p>В назначенном мессенджере подтверждаете оплату по реквизитам или переводом.</p>
+          </div>
+
+          <div class="card">
+            <div class="step-number">3</div>
+            <h3>Получаете файл</h3>
+            <p>После оплаты вам сразу отправляют PDF/Excel/шаблон для скачивания.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="price">
+      <div class="container">
+        <div class="section-title">
+          <h2>Цена</h2>
+          <p>Один продукт — одна система без лишней информации.</p>
+        </div>
+
+        <div class="price-wrap">
+          <div class="price-box">
+            <div class="old-price">2990 сом</div>
+            <div class="new-price">1990 <small>сом</small></div>
+            <ul class="list">
+              <li>Ежедневный planner</li>
+              <li>Шаблон целей и задач</li>
+              <li>Финансовый трекер</li>
+              <li>Привычки и ритм</li>
+            </ul>
+          </div>
+
+          <div class="buy-panel">
+            <h3>Купить План Трекер</h3>
+            <div class="pay-text">
+              Оплата через WhatsApp / Telegram. После подтверждения оплаты файл отправляется покупателю.
+            </div>
+
+            <div class="contact-block">
+              <a class="btn primary" href="https://wa.me/996223251108?text=%D0%97%D0%B5%D0%BB%D0%B0%D1%8E%20%D0%BA%D1%83%D0%BF%D0%B8%D1%82%D1%8C%20%D0%9F%D0%BB%D0%B0%D0%BD%20%D0%A2%D1%80%D0%B5%D0%BA%D0%B5%D1%80" target="_blank" rel="noreferrer">Купить через WhatsApp</a>
+              <a class="btn secondary" href="https://t.me/Flummox?text=%D0%97%D0%B5%D0%BB%D0%B0%D1%8E%20%D0%BA%D1%83%D0%BF%D0%B8%D1%82%D1%8C%20%D0%9F%D0%BB%D0%B0%D0%8F%20%D0%A2%D1%80%D0%B5%D0%BA%D0%B5%D1%80" target="_blank" rel="noreferrer">Купить через Telegram</a>
+            </div>
+
+            <p class="small">Важно: замени номер/логин на свой. Пример: +996700123456</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> План Трекер. Все права защищены.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
